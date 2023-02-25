@@ -4,15 +4,6 @@ using System.Text;
 
 namespace CaptchaGeneratorApp
 {
-    public class CaptchaResult
-    {
-
-        public string CaptchaCode { get; set; }
-        public byte[] CaptchaByteData { get; set; }
-        public string CaptchBase64Data => Convert.ToBase64String(CaptchaByteData);
-        public DateTime Timestamp { get; set; }
-    }
-
     public class CaptchaGenerator
     {
         static Random Rand = new Random(DateTime.Now.GetHashCode());
@@ -179,10 +170,12 @@ namespace CaptchaGeneratorApp
             return Color.FromArgb(Rand.Next(redlow), Rand.Next(greenLow), Rand.Next(blueLow));
         }
 
-        private int GetFontSize(int imageWidth, int captchCodeCount)
+        private int GetFontSize(int imageWidth, int captchCodeLength)
         {
-            var averageSize = imageWidth / captchCodeCount;
+            var averageSize = imageWidth / captchCodeLength;
             return Convert.ToInt32(averageSize);
         }
+
+
     }
 }
