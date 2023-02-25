@@ -8,7 +8,7 @@ namespace CaptchaGeneratorApp
         private static char[] CodeLetters = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public string GenerateCaptchaCode()
         {
-            return Extensions.GetUniqueKey(6, CodeLetters);
+            return Extensions.GetUniqueKey(4, CodeLetters);
         }
 
         public CaptchaResult GenerateCaptchaImage(ushort width, ushort height, string captchaCode)
@@ -22,6 +22,7 @@ namespace CaptchaGeneratorApp
                 BackgroundColor = new Color[] { Color.White },
                 Width = width,
                 Height = height,
+                MaxRotationDegrees = 15,
                 FontSize = GetFontSize(width, captchaCode.Length)
             };
             var slc = new CaptchaModule(opt);
