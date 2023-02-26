@@ -1,5 +1,5 @@
-# CaptchaGenerator
-CaptchaGenerator is a simple cross-platform NuGet package for generating image captcha.
+# Captcha Generator
+Captcha Generator is a simple cross-platform library for generating image captcha.
 
 ## Features
 
