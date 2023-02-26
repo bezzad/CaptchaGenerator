@@ -1,7 +1,6 @@
-﻿using CaptchaGeneratorApp;
-
-var captchaGenerator = new CaptchaGenerator();
-Directory.CreateDirectory("captcha");
+﻿var captchaGenerator = new CaptchaGenerator.CaptchaGenerator();
+// Create path: "...\CaptchaGenerator\src\CaptchaGenerator.Sample\bin\debug\net6.0\captcha"
+Directory.CreateDirectory("captcha"); 
 
 for (int i = 0; i < 100; i++)
 {

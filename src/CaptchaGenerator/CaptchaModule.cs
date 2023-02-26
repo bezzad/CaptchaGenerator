@@ -5,7 +5,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.Numerics;
 
-namespace CaptchaGeneratorApp
+namespace CaptchaGenerator
 {
     public class CaptchaModule : ICaptchaModule
     {
@@ -31,7 +31,7 @@ namespace CaptchaGeneratorApp
 
                 foreach (char c in stringText)
                 {
-                    var location = new PointF(startX + position,  Rand.Next(6, Math.Abs(_options.Height - _options.FontSize - 5)));
+                    var location = new PointF(startX + position, Rand.Next(6, Math.Abs(_options.Height - _options.FontSize - 5)));
                     imgText.Mutate(ctx => ctx.DrawText(c.ToString(), font, _options.TextColor[Rand.Next(0, _options.TextColor.Length)], location));
                     position += TextMeasurer.Measure(c.ToString(), new TextOptions(font)).Width;
                 }

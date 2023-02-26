@@ -4,7 +4,7 @@ using SixLabors.ImageSharp.Formats.Png;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CaptchaGeneratorApp
+namespace CaptchaGenerator
 {
     public static class Extensions
     {

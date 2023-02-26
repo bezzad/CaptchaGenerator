@@ -2,7 +2,7 @@ using SixLabors.Fonts;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 
-namespace CaptchaGeneratorApp
+namespace CaptchaGenerator
 {
     public class CaptchaOptions
     {

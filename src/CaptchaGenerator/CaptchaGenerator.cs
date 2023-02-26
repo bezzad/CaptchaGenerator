@@ -1,7 +1,7 @@
 ﻿using SixLabors.ImageSharp;
 using System.Runtime.InteropServices;
 
-namespace CaptchaGeneratorApp
+namespace CaptchaGenerator
 {
     public class CaptchaGenerator
     {

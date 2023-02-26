@@ -1,4 +1,4 @@
-﻿namespace CaptchaGeneratorApp
+﻿namespace CaptchaGenerator
 {
     public class CaptchaResult
     {
