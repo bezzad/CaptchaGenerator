@@ -7,12 +7,12 @@ using System.Numerics;
 
 namespace CaptchaGenerator
 {
-    public class CaptchaModule : ICaptchaModule
+    public class Captcha : ICaptchaModule
     {
         private readonly CaptchaOptions _options;
         private static Random Rand = new Random(DateTime.Now.GetHashCode());
 
-        public CaptchaModule(CaptchaOptions options)
+        public Captcha(CaptchaOptions options)
         {
             _options = options;
         }
@@ -37,7 +37,7 @@ namespace CaptchaGenerator
                 }
 
                 //add rotation
-                AffineTransformBuilder rotation = getRotation();
+                AffineTransformBuilder rotation = GetRotation();
                 imgText.Mutate(ctx => ctx.Transform(rotation));
 
                 // add the dynamic image to original image
@@ -79,17 +79,15 @@ namespace CaptchaGenerator
             return result;
         }
 
-        private AffineTransformBuilder getRotation()
+        private AffineTransformBuilder GetRotation()
         {
-            Random random = new Random();
             var builder = new AffineTransformBuilder();
-            var width = random.Next(10, _options.Width);
-            var height = random.Next(10, _options.Height);
+            var width = Rand.Next(10, _options.Width);
+            var height = Rand.Next(10, _options.Height);
             var pointF = new PointF(width, height);
-            var rotationDegrees = random.Next(0, _options.MaxRotationDegrees);
+            var rotationDegrees = Rand.Next(0, _options.MaxRotationDegrees);
             var result = builder.PrependRotationDegrees(rotationDegrees, pointF);
             return result;
         }
-
     }
 }

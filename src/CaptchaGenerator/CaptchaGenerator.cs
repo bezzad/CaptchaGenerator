@@ -1,7 +1,4 @@
-﻿using SixLabors.ImageSharp;
-using System.Runtime.InteropServices;
-
-namespace CaptchaGenerator
+﻿namespace CaptchaGenerator
 {
     public class CaptchaGenerator
     {
@@ -13,27 +10,13 @@ namespace CaptchaGenerator
 
         public CaptchaResult GenerateCaptchaImage(ushort width, ushort height, string captchaCode)
         {
-            var opt = new CaptchaOptions
+            var slc = new Captcha(new CaptchaOptions
             {
-                DrawLines = 5,
-                TextColor = new Color[] { Color.DarkGray, Color.Gray, Color.LightGray, Color.SlateGray, Color.Black },
-                DrawLinesColor = new Color[] { Color.Gray, Color.Black, Color.SlateGray },
-                NoiseRate = 100,
-                BackgroundColor = new Color[] { Color.White },
                 Width = width,
                 Height = height,
                 MaxRotationDegrees = 15,
                 FontSize = GetFontSize(width, captchaCode.Length)
-            };
-            var slc = new CaptchaModule(opt);
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                opt.FontFamilies = new string[] { "DejaVu Serif", "DejaVu Sans Mono" };
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                opt.FontFamilies = new string[] { "San Francisco", "Helvetica" };
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                opt.FontFamilies = new string[] { "Arial", "Verdana", "Times New Roman" };
-
+            });
             var captchaCodeBytes = slc.Generate(captchaCode);
 
             return new CaptchaResult
