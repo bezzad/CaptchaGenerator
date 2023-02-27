@@ -22,9 +22,9 @@ namespace CaptchaGenerator
             byte[] result;
             using (var imgText = new Image<Rgba32>(_options.Width, _options.Height))
             {
-                float position = 0;
+                float position = 5;
                 byte charPadding = (byte)Rand.Next(5, 10);
-                imgText.Mutate(ctx => ctx.BackgroundColor(Color.Transparent));
+                imgText.Mutate(ctx => ctx.BackgroundColor(_options.BackgroundColor[Rand.Next(0, _options.BackgroundColor.Length)]));
 
                 string fontName = _options.FontFamilies[Rand.Next(0, _options.FontFamilies.Length)];
                 Font font = SystemFonts.CreateFont(fontName, _options.FontSize, _options.FontStyle);
@@ -42,7 +42,7 @@ namespace CaptchaGenerator
 
                 // add the dynamic image to original image
                 var size = (ushort)TextMeasurer.Measure(text, new TextOptions(font)).Width;
-                var img = new Image<Rgba32>(size + 10 + 5, _options.Height);
+                var img = new Image<Rgba32>(size + 15, _options.Height);
                 img.Mutate(ctx => ctx.BackgroundColor(_options.BackgroundColor[Rand.Next(0, _options.BackgroundColor.Length)]));
                 img.Mutate(ctx => ctx.DrawImage(imgText, 0.80f));
 

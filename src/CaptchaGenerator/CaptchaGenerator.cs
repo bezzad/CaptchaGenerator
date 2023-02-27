@@ -29,7 +29,7 @@
 
         private byte GetFontSize(int imageWidth, int captchCodeLength)
         {
-            var averageSize = imageWidth / captchCodeLength;
+            var averageSize = imageWidth / captchCodeLength * 1.2;
             return Convert.ToByte(averageSize);
         }
     }
