@@ -9,6 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaptchaGenerator", "Captcha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaGenerator.Test", "CaptchaGenerator.Test\CaptchaGenerator.Test.csproj", "{AD83839A-6745-4C8D-9EAE-532325FCECF2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{8FC30BDC-497D-4B82-A1D1-07BE3D95A1F8}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\dotnet-ubuntu.yml = ..\.github\workflows\dotnet-ubuntu.yml
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
