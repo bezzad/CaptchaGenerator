@@ -108,7 +108,6 @@ namespace CaptchaGenerator.Test.UnitTests
             var height = 10;
             var backgroundColor = Color.White.ToPixel<Rgba32>();
             var lineColor = Color.Black.ToPixel<Rgba32>();
-            var pixels = new Rgba32[width * height].AsSpan();
             var origin = new PointF(width / 2, height / 2);
             var rotationDegrees = 90;
             using var img = new Image<Rgba32>(width, height);
@@ -118,7 +117,6 @@ namespace CaptchaGenerator.Test.UnitTests
             img.Mutate(ctx => ctx.DrawLines(lineColor, 2, new PointF[] { new PointF(width/2, 0), new PointF(width/2, height) }));
             AffineTransformBuilder rotation = GetRotation(rotationDegrees, origin);
             img.Mutate(ctx => ctx.Transform(rotation)); // now the line is vertical
-            img.CopyPixelDataTo(pixels);
             var middleRowPixels = img.DangerousGetPixelRowMemory(5).Span;
 
             // assert
