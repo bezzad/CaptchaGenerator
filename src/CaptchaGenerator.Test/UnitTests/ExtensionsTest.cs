@@ -1,5 +1,6 @@
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Formats.Png;
+using System.Linq;
 using Xunit;
 
 namespace CaptchaGenerator.Test.UnitTests
