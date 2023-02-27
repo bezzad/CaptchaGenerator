@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaptchaGenerator.Sample", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaptchaGenerator", "CaptchaGenerator\CaptchaGenerator.csproj", "{BB43C31D-B967-4FC1-B0D1-FFD56DDA528B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaGenerator.Test", "CaptchaGenerator.Test\CaptchaGenerator.Test.csproj", "{AD83839A-6745-4C8D-9EAE-532325FCECF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BB43C31D-B967-4FC1-B0D1-FFD56DDA528B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB43C31D-B967-4FC1-B0D1-FFD56DDA528B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB43C31D-B967-4FC1-B0D1-FFD56DDA528B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD83839A-6745-4C8D-9EAE-532325FCECF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD83839A-6745-4C8D-9EAE-532325FCECF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD83839A-6745-4C8D-9EAE-532325FCECF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD83839A-6745-4C8D-9EAE-532325FCECF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -8,6 +8,8 @@ namespace CaptchaGenerator
 {
     public static class Extensions
     {
+        private static Random Rand = new Random(DateTime.Now.GetHashCode());
+
         private static readonly char[] Chars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVXYZW23456789".ToCharArray();
 
         public static IImageEncoder GetEncoder(EncoderTypes encoderType)
@@ -49,9 +51,8 @@ namespace CaptchaGenerator
 
         public static float GenerateNextFloat(double min = double.MinValue, double max = double.MaxValue)
         {
-            Random random = new Random(DateTime.Now.GetHashCode());
             double range = max - min;
-            double sample = random.NextDouble();
+            double sample = Rand.NextDouble();
             double scaled = sample * range + min;
             float result = (float)scaled;
             return result;
