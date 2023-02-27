@@ -1,0 +1,32 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET Windows x64
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET 6.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore CaptchaGenerator dependencies
+      run: dotnet restore ./src/CaptchaGenerator/CaptchaGenerator.csproj
+
+    - name: Build CaptchaGenerator
+      run: dotnet build ./src/CaptchaGenerator/CaptchaGenerator.csproj --no-restore
+
+    - name: Restore CaptchaGenerator.Test Dependencies
+      run: dotnet restore ./src/CaptchaGenerator.Test/CaptchaGenerator.Test.csproj
+
+    - name: Build CaptchaGenerator.Test Project
+      run: dotnet build ./src/CaptchaGenerator.Test/CaptchaGenerator.Test.csproj --no-restore
+
+    - name: Run Tests
+      run: dotnet test ./src/CaptchaGenerator.Test/CaptchaGenerator.Test.csproj --no-build --verbosity normal
