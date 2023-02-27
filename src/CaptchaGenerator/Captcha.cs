@@ -56,7 +56,6 @@ namespace CaptchaGenerator
             img.Save(ms, _options.Encoder);
             result = ms.ToArray();
 
-
             return result;
         }
 
