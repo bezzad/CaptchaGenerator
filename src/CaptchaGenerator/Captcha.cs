@@ -76,19 +76,23 @@ namespace CaptchaGenerator
             int y1 = Rand.Next(0, img.Height);
             var thickness = Extensions.GenerateNextFloat(_options.MinLineThickness, _options.MaxLineThickness);
             var lineColor = _options.DrawLinesColor[Rand.Next(0, _options.DrawLinesColor.Length)];
-             img.Mutate(ctx => ctx.DrawLines(lineColor, thickness,
-                          new PointF[] { new PointF(x0, y0), new PointF(x1, y1) }));
+            img.Mutate(ctx => ctx.DrawLines(lineColor, thickness,
+                         new PointF[] { new PointF(x0, y0), new PointF(x1, y1) }));
         }
 
         protected AffineTransformBuilder GetRotation()
         {
-            var builder = new AffineTransformBuilder();
-            var width = Rand.Next(10, _options.Width);
-            var height = Rand.Next(10, _options.Height);
+            var width = Rand.Next(Math.Min((ushort)10, _options.Width), _options.Width);
+            var height = Rand.Next(Math.Min((ushort)10, _options.Height), _options.Height);
             var pointF = new PointF(width, height);
             var rotationDegrees = Rand.Next(0, _options.MaxRotationDegrees);
-            var result = builder.PrependRotationDegrees(rotationDegrees, pointF);
+            var result = GetRotation(rotationDegrees, pointF);
             return result;
+        }
+
+        protected AffineTransformBuilder GetRotation(float degrees, Vector2 origin)
+        {
+            return new AffineTransformBuilder().PrependRotationDegrees(degrees, origin);
         }
     }
 }
