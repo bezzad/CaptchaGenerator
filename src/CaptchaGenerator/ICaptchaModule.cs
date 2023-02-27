@@ -2,6 +2,6 @@
 {
     public interface ICaptchaModule
     {
-        byte[] Generate(string stringText);
+        byte[] Generate(string text);
     }
 }
