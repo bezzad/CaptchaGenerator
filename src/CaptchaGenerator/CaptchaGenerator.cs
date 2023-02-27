@@ -3,9 +3,9 @@
     public class CaptchaGenerator
     {
         private static char[] CodeLetters = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
-        public string GenerateCaptchaCode()
+        public string GenerateCaptchaCode(int keyDigit = 4)
         {
-            return Extensions.GetUniqueKey(4, CodeLetters);
+            return Extensions.GetUniqueKey(keyDigit, CodeLetters);
         }
 
         public CaptchaResult GenerateCaptchaImage(ushort width, ushort height, string captchaCode)
