@@ -1,4 +1,6 @@
-﻿namespace CaptchaGenerator
+﻿using System;
+
+namespace CaptchaGenerator
 {
     public class CaptchaGenerator
     {
