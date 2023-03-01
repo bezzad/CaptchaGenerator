@@ -114,19 +114,14 @@ namespace CaptchaGenerator.Test.UnitTests
             img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
 
             // act:  draw a vertical line and rotate 90 degree to a horizontal line
-            img.Mutate(ctx => ctx.DrawLines(lineColor, 2, new PointF[] { new PointF(width/2, 0), new PointF(width/2, height) }));
+            img.Mutate(ctx => ctx.DrawLines(lineColor, 2, new PointF[] { new PointF(width / 2, 0), new PointF(width / 2, height) }));
             AffineTransformBuilder rotation = GetRotation(rotationDegrees, origin);
             img.Mutate(ctx => ctx.Transform(rotation)); // now the line is vertical
             var middleRowPixels = img.DangerousGetPixelRowMemory(5).Span;
 
             // assert
             foreach (var pixel in middleRowPixels)
-            {
-                if(pixel.Rgb != lineColor.Rgb)
-                {
-                    Assert.Fail("There is no line color!");
-                }
-            }
+                Assert.True(pixel.Rgb == lineColor.Rgb, "There is no line color!");
         }
     }
 }
