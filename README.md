@@ -1,5 +1,5 @@
-[![Windows x64](https://github.com/bezzad/CaptchaGenerator/workflows/Windows%20x64/badge.svg)](https://github.com/bezzad/CaptchaGenerator/actions/workflows/dotnet-windows.yml)
-[![Ubuntu x64](https://github.com/bezzad/CaptchaGenerator/workflows/Ubuntu%20x64/badge.svg)](https://github.com/bezzad/CaptchaGenerator/actions/workflows/dotnet-ubuntu.yml)
+[![.NET Windows x64](https://github.com/bezzad/CaptchaGenerator/actions/workflows/dotnet-windows.yml/badge.svg)](https://github.com/bezzad/CaptchaGenerator/actions/workflows/dotnet-windows.yml)
+[![.NET Ubuntu x64](https://github.com/bezzad/CaptchaGenerator/actions/workflows/dotnet-ubuntu.yml/badge.svg)](https://github.com/bezzad/CaptchaGenerator/actions/workflows/dotnet-ubuntu.yml)
 [![NuGet](https://img.shields.io/nuget/dt/Captcha.Net.svg)](https://www.nuget.org/packages/Captcha.Net)
 [![NuGet](https://img.shields.io/nuget/vpre/Captcha.Net.svg)](https://www.nuget.org/packages/Captcha.Net)
 [![License](https://img.shields.io/github/license/bezzad/CaptchaGenerator.svg)](https://github.com/bezzad/CaptchaGenerator/blob/master/LICENSE)
