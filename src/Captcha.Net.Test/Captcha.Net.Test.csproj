@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CaptchaGenerator\CaptchaGenerator.csproj" />
+    <ProjectReference Include="..\Captcha.Net\Captcha.Net.csproj" />
   </ItemGroup>
 
 </Project>

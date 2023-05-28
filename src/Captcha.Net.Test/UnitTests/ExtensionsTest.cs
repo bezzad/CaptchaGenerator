@@ -3,7 +3,7 @@ using SixLabors.ImageSharp.Formats.Png;
 using System.Linq;
 using Xunit;
 
-namespace CaptchaGenerator.Test.UnitTests
+namespace Captcha.Net.Test.UnitTests
 {
     public class ExtensionsTest
     {

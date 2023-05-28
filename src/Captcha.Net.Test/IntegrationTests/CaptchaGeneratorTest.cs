@@ -4,7 +4,7 @@ using SixLabors.ImageSharp.PixelFormats;
 using System.Linq;
 using Xunit;
 
-namespace CaptchaGenerator.Test.IntegrationTests
+namespace Captcha.Net.Test.IntegrationTests
 {
     public class CaptchaGeneratorTest
     {
@@ -29,15 +29,15 @@ namespace CaptchaGenerator.Test.IntegrationTests
             // arrange
             ushort width = 100;
             ushort height = 50;
-            var code = "012340";            
+            var code = "012340";
             var generator = new CaptchaGenerator();
             var backgroundHistogram = 0;
 
             // act
             var captcha = generator.GenerateCaptchaImage(width, height, code);
             var image = Image.Load<Rgba32>(captcha.CaptchaByteData);
-            var pixels = image.GetPixelMemoryGroup().SelectMany(g=> g.ToArray());
-            foreach(var pixel in pixels)
+            var pixels = image.GetPixelMemoryGroup().SelectMany(g => g.ToArray());
+            foreach (var pixel in pixels)
             {
                 if (pixel == Color.White.ToPixel<Rgba32>())
                     backgroundHistogram++;

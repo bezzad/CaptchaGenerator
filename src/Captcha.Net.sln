@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaptchaGenerator.Sample", "CaptchaGenerator.Sample\CaptchaGenerator.Sample.csproj", "{8676D400-3F18-419F-A9F1-4ECF9FC76C33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.Net.Sample", "Captcha.Net.Sample\Captcha.Net.Sample.csproj", "{8676D400-3F18-419F-A9F1-4ECF9FC76C33}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaptchaGenerator", "CaptchaGenerator\CaptchaGenerator.csproj", "{BB43C31D-B967-4FC1-B0D1-FFD56DDA528B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.Net", "Captcha.Net\Captcha.Net.csproj", "{BB43C31D-B967-4FC1-B0D1-FFD56DDA528B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaGenerator.Test", "CaptchaGenerator.Test\CaptchaGenerator.Test.csproj", "{AD83839A-6745-4C8D-9EAE-532325FCECF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Captcha.Net.Test", "Captcha.Net.Test\Captcha.Net.Test.csproj", "{AD83839A-6745-4C8D-9EAE-532325FCECF2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{8FC30BDC-497D-4B82-A1D1-07BE3D95A1F8}"
 	ProjectSection(SolutionItems) = preProject

@@ -1,4 +1,6 @@
-﻿var captchaGenerator = new CaptchaGenerator.CaptchaGenerator();
+﻿using Captcha.Net;
+
+var captchaGenerator = new CaptchaGenerator();
 // Create path: "...\CaptchaGenerator\src\CaptchaGenerator.Sample\bin\debug\net6.0\captcha"
 Directory.CreateDirectory("captcha"); 
 
@@ -11,4 +13,5 @@ for (int i = 0; i < 100; i++)
     Console.WriteLine();
 
     File.WriteAllBytes($"captcha/captcha-{i}.png", result.CaptchaByteData);
+    
 }

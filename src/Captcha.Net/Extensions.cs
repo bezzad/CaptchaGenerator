@@ -5,7 +5,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace CaptchaGenerator
+namespace Captcha.Net
 {
     public static class Extensions
     {

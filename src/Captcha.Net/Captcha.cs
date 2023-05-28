@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using System.Numerics;
 
-namespace CaptchaGenerator
+namespace Captcha.Net
 {
     public class Captcha : ICaptchaModule
     {

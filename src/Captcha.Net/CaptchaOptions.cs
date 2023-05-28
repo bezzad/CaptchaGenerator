@@ -3,7 +3,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats;
 using System.Runtime.InteropServices;
 
-namespace CaptchaGenerator
+namespace Captcha.Net
 {
     public class CaptchaOptions
     {

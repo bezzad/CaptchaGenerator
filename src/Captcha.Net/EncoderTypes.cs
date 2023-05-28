@@ -1,4 +1,4 @@
-﻿namespace CaptchaGenerator
+﻿namespace Captcha.Net
 {
     public enum EncoderTypes
     {

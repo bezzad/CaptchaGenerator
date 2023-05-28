@@ -4,10 +4,9 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System;
-using System.Xml;
 using Xunit;
 
-namespace CaptchaGenerator.Test.UnitTests
+namespace Captcha.Net.Test.UnitTests
 {
     public class CaptchaTest : Captcha
     {

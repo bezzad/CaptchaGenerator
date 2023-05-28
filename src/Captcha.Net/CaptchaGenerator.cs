@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CaptchaGenerator
+namespace Captcha.Net
 {
     public class CaptchaGenerator
     {
