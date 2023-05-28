@@ -1,8 +1,8 @@
 ﻿using Captcha.Net;
+using System.Diagnostics;
 
 var captchaGenerator = new CaptchaGenerator();
-// Create path: "...\CaptchaGenerator\src\CaptchaGenerator.Sample\bin\debug\net6.0\captcha"
-Directory.CreateDirectory("captcha"); 
+var currentDirectory = Directory.CreateDirectory("captcha");
 
 for (int i = 0; i < 100; i++)
 {
@@ -12,6 +12,16 @@ for (int i = 0; i < 100; i++)
     Console.WriteLine(result.CaptchBase64Data);
     Console.WriteLine();
 
-    File.WriteAllBytes($"captcha/captcha-{i}.png", result.CaptchaByteData);
-    
+    File.WriteAllBytes($"{currentDirectory.FullName}/captcha-{i}.png", result.CaptchaByteData);
+}
+
+// open the directory after completion
+if (OperatingSystem.IsWindows())
+{ 
+    Process.Start("explorer.exe", currentDirectory.FullName); 
+}
+else if (OperatingSystem.IsLinux())
+{
+    // Start a new process to open the folder
+    Process.Start("xdg-open", currentDirectory.FullName);
 }

@@ -24,7 +24,7 @@ Captcha Generator is a simple cross-platform library for generating image captch
 
 ## Usage:
 ```csharp
-using CaptchaGenerator;
+using Captcha.Net;
 
 namespace ConsoleAppSample
 {
@@ -36,6 +36,8 @@ namespace ConsoleAppSample
 			var key = captchaGenerator.GenerateCaptchaCode();
 			var result = captchaGenerator.GenerateCaptchaImage(200, 100, key);
 			File.WriteAllBytes($"captcha.png", result.CaptchaByteData);
+
+			Console.WriteLine(result.CaptchBase64Data);
 		}
 	}
 }
