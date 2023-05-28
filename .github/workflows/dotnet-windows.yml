@@ -16,17 +16,17 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Restore CaptchaGenerator dependencies
-      run: dotnet restore ./src/CaptchaGenerator/CaptchaGenerator.csproj
+    - name: Restore Captcha.Net dependencies
+      run: dotnet restore ./src/Captcha.Net/Captcha.Net.csproj
 
-    - name: Build CaptchaGenerator
-      run: dotnet build ./src/CaptchaGenerator/CaptchaGenerator.csproj --no-restore
+    - name: Build Captcha.Net
+      run: dotnet build ./src/Captcha.Net/Captcha.Net.csproj --no-restore
 
-    - name: Restore CaptchaGenerator.Test Dependencies
-      run: dotnet restore ./src/CaptchaGenerator.Test/CaptchaGenerator.Test.csproj
+    - name: Restore Captcha.Net.Test Dependencies
+      run: dotnet restore ./src/Captcha.Net.Test/Captcha.Net.Test.csproj
 
-    - name: Build CaptchaGenerator.Test Project
-      run: dotnet build ./src/CaptchaGenerator.Test/CaptchaGenerator.Test.csproj --no-restore
+    - name: Build Captcha.Net.Test Project
+      run: dotnet build ./src/Captcha.Net.Test/Captcha.Net.Test.csproj --no-restore
 
     - name: Run Tests
-      run: dotnet test ./src/CaptchaGenerator.Test/CaptchaGenerator.Test.csproj --no-build --verbosity normal
+      run: dotnet test ./src/Captcha.Net.Test/Captcha.Net.Test.csproj --no-build --verbosity normal
