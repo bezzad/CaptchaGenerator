@@ -20,7 +20,7 @@ Captcha Generator is a simple cross-platform library for generating image captch
 
 ## Installing via the .NET Core command line interface
 
-    dotnet add package Captcha.Net|
+    dotnet add package Captcha.Net
 
 ## Usage:
 ```csharp

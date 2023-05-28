@@ -3,6 +3,7 @@ using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using SixLabors.ImageSharp.Processing.Processors.Transforms;
 using System;
 using Xunit;
 
@@ -12,12 +13,13 @@ namespace Captcha.Net.Test.UnitTests
     {
         public CaptchaTest() : base(new CaptchaOptions()) { }
 
-        [Fact]
-        public void ImageSizeTest()
+        [Theory]
+        [InlineData(10, 10)]
+        [InlineData(100, 100)]
+        [InlineData(200, 100)]
+        [InlineData(100, 300)]
+        public void ImageSizeTest(int width, int height)
         {
-            var width = 10;
-            var height = 10;
-
             // act
             using var img = new Image<Rgba32>(width, height);
 
@@ -26,12 +28,14 @@ namespace Captcha.Net.Test.UnitTests
             Assert.Equal(height, img.Height);
         }
 
-        [Fact]
-        public void AddNoisePointTest()
+        [Theory]
+        [InlineData(10, 10)]
+        [InlineData(100, 100)]
+        [InlineData(200, 100)]
+        [InlineData(100, 300)]
+        public void AddNoisePointTest(int width, int height)
         {
             // arrange
-            var width = 10;
-            var height = 10;
             var pixels = new Rgba32[width * height].AsSpan();
             var noiseColor = Color.Black.ToPixel<Rgba32>();
             var backgroundColor = Color.White.ToPixel<Rgba32>();
@@ -61,12 +65,14 @@ namespace Captcha.Net.Test.UnitTests
             Assert.Equal(width * height - 1, backgroundHistogram);
         }
 
-        [Fact]
-        public void DrawNoiseLinesTest()
+        [Theory]
+        [InlineData(10, 10)]
+        [InlineData(100, 100)]
+        [InlineData(200, 100)]
+        [InlineData(100, 300)]
+        public void DrawNoiseLinesTest(int width, int height)
         {
             // arrange
-            var width = 10;
-            var height = 10;
             var pixels = new Rgba32[width * height].AsSpan();
             var noiseColor = Color.Black.ToPixel<Rgba32>();
             var backgroundColor = Color.White.ToPixel<Rgba32>();
@@ -99,24 +105,31 @@ namespace Captcha.Net.Test.UnitTests
             Assert.True(2 <= backgroundHistogram, "background histogram is less than 2");
         }
 
-        [Fact]
-        public void GetRotationTest()
+
+        [Theory]
+        [InlineData(10, 10)]
+        [InlineData(100, 100)]
+        public void GetRotationTest(int width, int height)
         {
             // arrange
-            var width = 10;
-            var height = 10;
+            var thickness = width % 2 == 0 ? 2 : 3;
             var backgroundColor = Color.White.ToPixel<Rgba32>();
             var lineColor = Color.Black.ToPixel<Rgba32>();
-            var origin = new PointF(width / 2, height / 2);
-            var rotationDegrees = 90;
+            var middleOffsetOfWidth = width / 2;
+            var middleOffsetOfHeight = height / 2;
+            var originCenter = new PointF(middleOffsetOfWidth, middleOffsetOfHeight);
+            var rotationDegrees = 90f;
             using var img = new Image<Rgba32>(width, height);
-            img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
 
-            // act:  draw a vertical line and rotate 90 degree to a horizontal line
-            img.Mutate(ctx => ctx.DrawLines(lineColor, 2, new PointF[] { new PointF(width / 2, 0), new PointF(width / 2, height) }));
-            AffineTransformBuilder rotation = GetRotation(rotationDegrees, origin);
+            img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
+            img.Mutate(ctx => ctx.DrawLines(lineColor, thickness, new PointF[] { new PointF(middleOffsetOfWidth, 0), new PointF(middleOffsetOfWidth, height) }));
+            img.SaveAsPng("D:\\test1.png");
+
+            // act:  rotate 90 degree to a horizontal line
+            AffineTransformBuilder rotation = GetRotation(rotationDegrees, new PointF(middleOffsetOfWidth, middleOffsetOfHeight));
             img.Mutate(ctx => ctx.Transform(rotation)); // now the line is vertical
-            var middleRowPixels = img.DangerousGetPixelRowMemory(5).Span;
+            var middleRowPixels = img.DangerousGetPixelRowMemory(middleOffsetOfWidth).Span;
+            img.SaveAsPng("D:\\test2.png");
 
             // assert
             foreach (var pixel in middleRowPixels)
