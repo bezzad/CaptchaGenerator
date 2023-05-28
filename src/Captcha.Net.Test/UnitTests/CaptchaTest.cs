@@ -123,13 +123,11 @@ namespace Captcha.Net.Test.UnitTests
 
             img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
             img.Mutate(ctx => ctx.DrawLines(lineColor, thickness, new PointF[] { new PointF(middleOffsetOfWidth, 0), new PointF(middleOffsetOfWidth, height) }));
-            img.SaveAsPng("D:\\test1.png");
 
             // act:  rotate 90 degree to a horizontal line
             AffineTransformBuilder rotation = GetRotation(rotationDegrees, new PointF(middleOffsetOfWidth, middleOffsetOfHeight));
             img.Mutate(ctx => ctx.Transform(rotation)); // now the line is vertical
             var middleRowPixels = img.DangerousGetPixelRowMemory(middleOffsetOfWidth).Span;
-            img.SaveAsPng("D:\\test2.png");
 
             // assert
             foreach (var pixel in middleRowPixels)
