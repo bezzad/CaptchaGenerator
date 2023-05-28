@@ -4,10 +4,37 @@
     <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Captcha.Net</PackageId>
+    <Title>Captcha.Net</Title>
+    <FileVersion>1.0.1</FileVersion>
+    <Authors>Bezzad</Authors>
+    <Description>CAPTCHA Generator with .Net 6.0</Description>
+    <Copyright>2023</Copyright>
+    <PackageProjectUrl>https://github.com/bezzad/CaptchaGenerator</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/bezzad/CaptchaGenerator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Captcha; image-generator; captcha-generator; recaptcha</PackageTags>
+    <PackageReleaseNotes>First public version</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <Version>$(FileVersion)</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.3" />
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
   </ItemGroup>
 
