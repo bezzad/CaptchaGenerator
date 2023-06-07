@@ -4,7 +4,7 @@ using System.Diagnostics;
 var captchaGenerator = new CaptchaGenerator();
 var currentDirectory = Directory.CreateDirectory("captcha");
 
-for (int i = 0; i < 100; i++)
+for (int i = 0; i < 1000; i++)
 {
     var key = captchaGenerator.GenerateCaptchaCode();
     var result = captchaGenerator.GenerateCaptchaImage(200, 100, key);
