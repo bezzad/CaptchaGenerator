@@ -46,7 +46,7 @@ namespace Captcha.Net.Test.UnitTests
 
             // act
             img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
-            AddNoisePoint(img);
+            img.Mutate(ctx => AddNoisePoint(ctx, width, height));
             img.CopyPixelDataTo(pixels);
             foreach (var pixel in pixels)
             {
@@ -85,7 +85,7 @@ namespace Captcha.Net.Test.UnitTests
 
             // act
             img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
-            DrawNoiseLines(img);
+            img.Mutate(ctx => DrawNoiseLines(ctx, width, height));
             img.CopyPixelDataTo(pixels);
             foreach (var pixel in pixels)
             {

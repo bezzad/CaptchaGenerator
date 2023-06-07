@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Concurrent;
 
 namespace Captcha.Net
 {
     public class CaptchaGenerator
     {
         private static char[] CodeLetters = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        private static ConcurrentDictionary<string, Captcha> CaptchaKeeper = new ConcurrentDictionary<string, Captcha>();
+
         public string GenerateCaptchaCode(int keyDigit = 4)
         {
             return Extensions.GetUniqueKey(keyDigit, CodeLetters);
@@ -12,14 +15,18 @@ namespace Captcha.Net
 
         public CaptchaResult GenerateCaptchaImage(ushort width, ushort height, string captchaCode)
         {
-            var slc = new Captcha(new CaptchaOptions
-            {
-                Width = width,
-                Height = height,
-                MaxRotationDegrees = 15,
-                FontSize = GetFontSize(width, captchaCode.Length)
-            });
-            var captchaCodeBytes = slc.Generate(captchaCode);
+            var key = $"{width}w_{height}h_{captchaCode.Length}d";
+            var captcha = CaptchaKeeper.GetOrAdd(key, k =>
+                new Captcha(new CaptchaOptions
+                {
+                    Width = width,
+                    Height = height,
+                    MaxRotationDegrees = 15,
+                    FontSize = GetFontSize(width, captchaCode.Length),
+                    EncoderType = EncoderTypes.Png
+                }));
+
+            var captchaCodeBytes = captcha.Generate(captchaCode);
 
             return new CaptchaResult
             {

@@ -11,7 +11,7 @@ for (int i = 0; i < count; i++)
 {
     stopWatch.Restart();
     var key = captchaGenerator.GenerateCaptchaCode();
-    var result = captchaGenerator.GenerateCaptchaImage(200, 100, key);
+    var result = captchaGenerator.GenerateCaptchaImage(145, 56, key);
     Console.WriteLine($"Captcha {i}: \n");
     Console.WriteLine(result.CaptchBase64Data);
     Console.WriteLine();
