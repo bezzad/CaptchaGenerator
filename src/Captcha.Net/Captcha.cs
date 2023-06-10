@@ -6,6 +6,7 @@ using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Concurrent;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 
 namespace Captcha.Net
@@ -27,18 +28,17 @@ namespace Captcha.Net
             _options = options;
             if (_font == null)
             {
-                try
-                {
-                    var fontName = _options.FontFamilies[0];
-                    _font = SystemFonts.CreateFont(fontName, _options.FontSize, _options.FontStyle);
-                }
-                catch
-                {
-                    if (_options.FontFamilies.Length > 1)
+                foreach (var name in _options.FontFamilies)
+                    if (SystemFonts.Collection.TryGet(name, out var fontFamily))
                     {
-                        var fontName = _options.FontFamilies[1];
-                        _font = SystemFonts.CreateFont(fontName, _options.FontSize, _options.FontStyle);
+                        _font = fontFamily.CreateFont(_options.FontSize, _options.FontStyle);
+                        break;
                     }
+
+                if (_font == null)
+                {
+                    var fontFamily = SystemFonts.Families.FirstOrDefault();
+                    _font = fontFamily.CreateFont(_options.FontSize, _options.FontStyle);
                 }
             }
 
@@ -115,7 +115,7 @@ namespace Captcha.Net
             int x0 = Rand.Next(0, Rand.Next(0, Math.Min(30, width)));
             int y0 = Rand.Next(Math.Min(10, height), height);
             int x1 = Rand.Next(width - Rand.Next(0, (int)(width * 0.25)), width);
-            int y1 = Rand.Next(0, height);            
+            int y1 = Rand.Next(0, height);
             var lineColor = _options.DrawLinesColor[Rand.Next(0, _options.DrawLinesColor.Length)];
             ctx.DrawLines(lineColor, LineThickness.Value, new PointF[] { new PointF(x0, y0), new PointF(x1, y1) });
         }
@@ -125,8 +125,8 @@ namespace Captcha.Net
             var width = Rand.Next(Math.Min((ushort)10u, _options.Width), _options.Width);
             var height = Rand.Next(Math.Min((ushort)10u, _options.Height), _options.Height);
             var pointF = new PointF(width, height);
-            var rotationDegrees = _options.RotationDegree.HasValue && _options.RotationDegree <= _options.MaxRotationDegrees 
-                ? _options.RotationDegree.Value 
+            var rotationDegrees = _options.RotationDegree.HasValue && _options.RotationDegree <= _options.MaxRotationDegrees
+                ? _options.RotationDegree.Value
                 : Rand.Next(0, _options.MaxRotationDegrees);
             var result = GetRotation(rotationDegrees, pointF);
             return result;

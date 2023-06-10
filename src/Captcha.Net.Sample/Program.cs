@@ -20,8 +20,9 @@ for (int i = 0; i < count; i++)
     File.WriteAllBytes($"{currentDirectory.FullName}/captcha-{i}.jpg", result.CaptchaByteData);
 }
 
-Console.WriteLine($"Duration:  Max({times.Max()}ms),  Min({times.Min()}ms),  Average({times.Average()}ms)");
-for (int i = 1, q = 1; i < 10000; i += q)
+var maxDuration = times.Max();
+Console.WriteLine($"Duration:  Max({maxDuration}ms),  Min({times.Min()}ms),  Average({times.Average()}ms)");
+for (int i = 1, q = 1; i < maxDuration + q; i += q)
 {
     var timeCount = times.Count(t => t <= i && t > i - q);
 
@@ -38,13 +39,17 @@ for (int i = 1, q = 1; i < 10000; i += q)
         q = 1000;
 }
 
-// open the directory after completion
-if (OperatingSystem.IsWindows())
+try
 {
-    Process.Start("explorer.exe", currentDirectory.FullName);
+    // open the directory after completion
+    if (OperatingSystem.IsWindows())
+    {
+        Process.Start("explorer.exe", currentDirectory.FullName);
+    }
+    else if (OperatingSystem.IsLinux())
+    {
+        // Start a new process to open the folder
+        Process.Start("xdg-open", currentDirectory.FullName);
+    }
 }
-else if (OperatingSystem.IsLinux())
-{
-    // Start a new process to open the folder
-    Process.Start("xdg-open", currentDirectory.FullName);
-}
+catch { }

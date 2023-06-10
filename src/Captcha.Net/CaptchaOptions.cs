@@ -36,7 +36,7 @@ namespace Captcha.Net
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 FontFamilies = new string[] { "San Francisco", "Helvetica" };
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                FontFamilies = new string[] { "Arial", "Verdana", "Times New Roman" };
+                FontFamilies = new string[] { "Microsoft Sans Serif", "Arial", "Verdana", "Times New Roman" };
         }
     }
 }
