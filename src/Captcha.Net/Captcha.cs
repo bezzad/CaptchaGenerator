@@ -4,6 +4,7 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Numerics;
 
@@ -11,15 +12,31 @@ namespace Captcha.Net
 {
     public class Captcha : ICaptchaModule
     {
-        protected readonly static Random Rand = new Random(DateTime.Now.GetHashCode());
+        protected static readonly Random Rand = new Random(DateTime.Now.GetHashCode());
+        protected static readonly ConcurrentDictionary<int, ushort> TextMeasures = new ConcurrentDictionary<int, ushort>();
+        protected static Font _font;
+        protected static AffineTransformBuilder RotationBuilder;
         protected readonly CaptchaOptions _options;
-        protected Font _font;
 
         public Captcha(CaptchaOptions options)
         {
             _options = options;
-            var fontName = _options.FontFamilies[Rand.Next(0, _options.FontFamilies.Length)];
-            _font = SystemFonts.CreateFont(fontName, _options.FontSize, _options.FontStyle);
+            if (_font == null)
+            {
+                try
+                {
+                    var fontName = _options.FontFamilies[0];
+                    _font = SystemFonts.CreateFont(fontName, _options.FontSize, _options.FontStyle);
+                }
+                catch
+                {
+                    if (_options.FontFamilies.Length > 1)
+                    {
+                        var fontName = _options.FontFamilies[1];
+                        _font = SystemFonts.CreateFont(fontName, _options.FontSize, _options.FontStyle);
+                    }
+                }
+            }
         }
 
         public byte[] Generate(string text)
@@ -28,7 +45,7 @@ namespace Captcha.Net
             imgText.Mutate(ctx => DrawText(ctx, _font, text));
 
             // add the dynamic image to original image
-            var size = (ushort)TextMeasurer.Measure(text, new TextOptions(_font)).Width;
+            var size = TextMeasures.GetOrAdd(text.Length, len => (ushort)TextMeasurer.Measure(text, new TextOptions(_font)).Width);
             using var img = new Image<Rgba32>(size + 15, _options.Height);
             img.Mutate(ctx => Draw(ctx, img.Width, img.Height, imgText));
 
@@ -51,8 +68,8 @@ namespace Captcha.Net
             }
 
             // add rotation
-            AffineTransformBuilder rotation = GetRotation();
-            imgContext.Transform(rotation);
+            RotationBuilder ??= GetRotation();
+            imgContext.Transform(RotationBuilder);
         }
 
         protected void Draw(IImageProcessingContext imgContext, int width, int height, Image<Rgba32> imgText)
@@ -94,7 +111,9 @@ namespace Captcha.Net
             var width = Rand.Next(Math.Min((ushort)10u, _options.Width), _options.Width);
             var height = Rand.Next(Math.Min((ushort)10u, _options.Height), _options.Height);
             var pointF = new PointF(width, height);
-            var rotationDegrees = Rand.Next(0, _options.MaxRotationDegrees);
+            var rotationDegrees = _options.RotationDegree.HasValue && _options.RotationDegree <= _options.MaxRotationDegrees 
+                ? _options.RotationDegree.Value 
+                : Rand.Next(0, _options.MaxRotationDegrees);
             var result = GetRotation(rotationDegrees, pointF);
             return result;
         }

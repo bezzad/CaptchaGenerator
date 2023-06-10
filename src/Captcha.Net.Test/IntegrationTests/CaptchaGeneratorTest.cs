@@ -29,6 +29,7 @@ namespace Captcha.Net.Test.IntegrationTests
             // arrange
             ushort width = 100;
             ushort height = 50;
+            var jpegWhiteBalanceRatio = 0.99; // 99% like white color
             var code = "012340";
             var generator = new CaptchaGenerator();
             var backgroundHistogram = 0;
@@ -39,7 +40,7 @@ namespace Captcha.Net.Test.IntegrationTests
             var pixels = image.GetPixelMemoryGroup().SelectMany(g => g.ToArray());
             foreach (var pixel in pixels)
             {
-                if (pixel == Color.White.ToPixel<Rgba32>())
+                if (pixel.Rgba >= Color.White.ToPixel<Rgba32>().Rgba * jpegWhiteBalanceRatio)
                     backgroundHistogram++;
             }
 

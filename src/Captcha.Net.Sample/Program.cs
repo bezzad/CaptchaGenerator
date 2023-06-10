@@ -17,7 +17,7 @@ for (int i = 0; i < count; i++)
     Console.WriteLine();
     stopWatch.Stop();
     times.Add(stopWatch.ElapsedMilliseconds);
-    File.WriteAllBytes($"{currentDirectory.FullName}/captcha-{i}.png", result.CaptchaByteData);
+    File.WriteAllBytes($"{currentDirectory.FullName}/captcha-{i}.jpg", result.CaptchaByteData);
 }
 
 Console.WriteLine($"Duration:  Max({times.Max()}ms),  Min({times.Min()}ms),  Average({times.Average()}ms)");    

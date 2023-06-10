@@ -22,8 +22,11 @@ namespace Captcha.Net
                     Width = width,
                     Height = height,
                     MaxRotationDegrees = 15,
+                    RotationDegree = 10,
+                    NoiseRate = 50,
+                    DrawLines = 4,
                     FontSize = GetFontSize(width, captchaCode.Length),
-                    EncoderType = EncoderTypes.Png
+                    EncoderType = EncoderTypes.Jpeg
                 }));
 
             var captchaCodeBytes = captcha.Generate(captchaCode);
