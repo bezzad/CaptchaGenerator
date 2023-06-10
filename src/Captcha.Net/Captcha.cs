@@ -13,7 +13,11 @@ namespace Captcha.Net
     public class Captcha : ICaptchaModule
     {
         protected static readonly Random Rand = new Random(DateTime.Now.GetHashCode());
-        protected static readonly ConcurrentDictionary<int, ushort> TextMeasures = new ConcurrentDictionary<int, ushort>();
+        protected static readonly ConcurrentDictionary<int, Image<Rgba32>> ImagesBuffer = new ConcurrentDictionary<int, Image<Rgba32>>();
+        protected static readonly byte CharPadding = (byte)Rand.Next(5, 10);
+        protected static float? CharWidth;
+        protected static float? LineThickness;
+        protected static Color? BackgroundColor;
         protected static Font _font;
         protected static AffineTransformBuilder RotationBuilder;
         protected readonly CaptchaOptions _options;
@@ -37,6 +41,11 @@ namespace Captcha.Net
                     }
                 }
             }
+
+            BackgroundColor ??= _options.BackgroundColor[Rand.Next(0, _options.BackgroundColor.Length)];
+            LineThickness ??= Extensions.GenerateNextFloat(_options.MinLineThickness, _options.MaxLineThickness);
+            CharWidth ??= TextMeasurer.Measure("8", new TextOptions(_font)).Width;
+            RotationBuilder ??= GetRotation();
         }
 
         public byte[] Generate(string text)
@@ -45,8 +54,7 @@ namespace Captcha.Net
             imgText.Mutate(ctx => DrawText(ctx, _font, text));
 
             // add the dynamic image to original image
-            var size = TextMeasures.GetOrAdd(text.Length, len => (ushort)TextMeasurer.Measure(text, new TextOptions(_font)).Width);
-            using var img = new Image<Rgba32>(size + 15, _options.Height);
+            using var img = GetImageBackground(text.Length);
             img.Mutate(ctx => Draw(ctx, img.Width, img.Height, imgText));
 
             using var ms = new MemoryStream();
@@ -54,21 +62,29 @@ namespace Captcha.Net
             return ms.ToArray();
         }
 
+        protected Image<Rgba32> GetImageBackground(int textLength)
+        {
+            return ImagesBuffer.GetOrAdd(textLength, len =>
+            {
+                var sampleText = "".PadRight(textLength, '8');
+                var size = (ushort)TextMeasurer.Measure(sampleText, new TextOptions(_font)).Width;
+                return new Image<Rgba32>(size + 15, _options.Height);
+            }).Clone();
+        }
+
         protected void DrawText(IImageProcessingContext imgContext, Font font, string text)
         {
             var position = 5f;
-            var charPadding = (byte)Rand.Next(5, 10);
-            imgContext.BackgroundColor(_options.BackgroundColor[Rand.Next(0, _options.BackgroundColor.Length)]);
+            imgContext.BackgroundColor(BackgroundColor.Value);
 
             foreach (char ch in text)
             {
-                var location = new PointF(charPadding + position, Rand.Next(6, Math.Abs(_options.Height - _options.FontSize - 5)));
+                var location = new PointF(CharPadding + position, Rand.Next(6, Math.Abs(_options.Height - _options.FontSize - 5)));
                 imgContext.DrawText(ch.ToString(), font, _options.TextColor[Rand.Next(0, _options.TextColor.Length)], location);
-                position += TextMeasurer.Measure(ch.ToString(), new TextOptions(font)).Width;
+                position += CharWidth.Value;
             }
 
-            // add rotation
-            RotationBuilder ??= GetRotation();
+            // add rotation            
             imgContext.Transform(RotationBuilder);
         }
 
@@ -90,8 +106,7 @@ namespace Captcha.Net
         {
             int x0 = Rand.Next(0, width);
             int y0 = Rand.Next(0, height);
-            int colorIndex = Rand.Next(0, _options.NoiseRateColor.Length);
-            var color = _options.NoiseRateColor[colorIndex];
+            var color = _options.NoiseRateColor[Rand.Next(0, _options.NoiseRateColor.Length)];
             ctx.DrawLines(color, 1F, new PointF[] { new Vector2(x0, y0), new Vector2(x0, y0) });
         }
 
@@ -100,10 +115,9 @@ namespace Captcha.Net
             int x0 = Rand.Next(0, Rand.Next(0, Math.Min(30, width)));
             int y0 = Rand.Next(Math.Min(10, height), height);
             int x1 = Rand.Next(width - Rand.Next(0, (int)(width * 0.25)), width);
-            int y1 = Rand.Next(0, height);
-            var thickness = Extensions.GenerateNextFloat(_options.MinLineThickness, _options.MaxLineThickness);
+            int y1 = Rand.Next(0, height);            
             var lineColor = _options.DrawLinesColor[Rand.Next(0, _options.DrawLinesColor.Length)];
-            ctx.DrawLines(lineColor, thickness, new PointF[] { new PointF(x0, y0), new PointF(x1, y1) });
+            ctx.DrawLines(lineColor, LineThickness.Value, new PointF[] { new PointF(x0, y0), new PointF(x1, y1) });
         }
 
         protected AffineTransformBuilder GetRotation()

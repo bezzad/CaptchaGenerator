@@ -22,7 +22,7 @@ namespace Captcha.Net
                     Width = width,
                     Height = height,
                     MaxRotationDegrees = 15,
-                    RotationDegree = 10,
+                    RotationDegree = 7,
                     NoiseRate = 50,
                     DrawLines = 4,
                     FontSize = GetFontSize(width, captchaCode.Length),

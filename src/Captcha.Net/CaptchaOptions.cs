@@ -13,13 +13,13 @@ namespace Captcha.Net
         /// </summary>
         public string[] FontFamilies { get; set; }
         public Color[] TextColor { get; set; } = new Color[] { Color.Blue, Color.Black, Color.Black, Color.DarkGray, Color.Brown, Color.Gray, Color.Gray, Color.Green, Color.SlateGray };
-        public Color[] DrawLinesColor { get; set; } = new Color[] { Color.Blue, Color.Black, Color.Black, Color.Brown, Color.Gray, Color.Green, Color.SlateGray };
+        public Color[] DrawLinesColor { get; set; } = new Color[] { Color.Blue, Color.Black, Color.Red, Color.Brown, Color.Gray, Color.Green, Color.SlateGray };
         public float MinLineThickness { get; set; } = 0.7f;
         public float MaxLineThickness { get; set; } = 2.0f;
         public ushort Width { get; set; } = 180;
         public ushort Height { get; set; } = 50;
         public ushort NoiseRate { get; set; } = 100;
-        public Color[] NoiseRateColor { get; set; } = new Color[] { Color.Gray };
+        public Color[] NoiseRateColor { get; set; } = new Color[] { Color.Gray, Color.Black, Color.Red };
         public byte FontSize { get; set; } = 29;
         public FontStyle FontStyle { get; set; } = FontStyle.Regular;
         public EncoderTypes EncoderType { get; set; } = EncoderTypes.Jpeg;
