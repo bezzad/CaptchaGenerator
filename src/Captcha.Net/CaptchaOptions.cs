@@ -32,7 +32,7 @@ namespace Captcha.Net
         public CaptchaOptions()
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                FontFamilies = new string[] { "DejaVu Serif", "DejaVu Sans Mono" };
+                FontFamilies = new string[] { "DejaVu Serif", "DejaVu Sans Mono", "Liberation Sans" };
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 FontFamilies = new string[] { "San Francisco", "Helvetica" };
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))

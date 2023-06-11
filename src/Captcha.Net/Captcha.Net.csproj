@@ -23,44 +23,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="fonts\DejaVuSerif-Bold.ttf" />
-    <None Remove="fonts\DejaVuSerif-BoldItalic.ttf" />
-    <None Remove="fonts\DejaVuSerif-Italic.ttf" />
-    <None Remove="fonts\DejaVuSerif.ttf" />
-    <None Remove="fonts\DejaVuSerifCondensed-Bold.ttf" />
-    <None Remove="fonts\DejaVuSerifCondensed-BoldItalic.ttf" />
-    <None Remove="fonts\DejaVuSerifCondensed-Italic.ttf" />
-    <None Remove="fonts\DejaVuSerifCondensed.ttf" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="fonts\DejaVuSerif-Bold.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerif-BoldItalic.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerif-Italic.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerif.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerifCondensed-Bold.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerifCondensed-BoldItalic.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerifCondensed-Italic.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="fonts\DejaVuSerifCondensed.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -74,12 +36,6 @@
   <ItemGroup>
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta15" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="fonts\DejaVu Fonts License.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
