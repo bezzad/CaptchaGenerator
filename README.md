@@ -35,7 +35,7 @@ namespace ConsoleAppSample
 			var captchaGenerator = new CaptchaGenerator();
 			var key = captchaGenerator.GenerateCaptchaCode();
 			var result = captchaGenerator.GenerateCaptchaImage(200, 100, key);
-			File.WriteAllBytes($"captcha.png", result.CaptchaByteData);
+			File.WriteAllBytes($"captcha.jpg", result.CaptchaByteData);
 
 			Console.WriteLine(result.CaptchBase64Data);
 		}
