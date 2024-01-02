@@ -44,7 +44,7 @@ namespace Captcha.Net
 
             BackgroundColor ??= _options.BackgroundColor[Rand.Next(0, _options.BackgroundColor.Length)];
             LineThickness ??= Extensions.GenerateNextFloat(_options.MinLineThickness, _options.MaxLineThickness);
-            CharWidth ??= TextMeasurer.Measure("8", new TextOptions(_font)).Width;
+            CharWidth ??= TextMeasurer.MeasureAdvance("8", new TextOptions(_font)).Width;
             RotationBuilder ??= GetRotation();
         }
 
@@ -67,7 +67,7 @@ namespace Captcha.Net
             return ImagesBuffer.GetOrAdd(textLength, len =>
             {
                 var sampleText = "".PadRight(textLength, '8');
-                var size = (ushort)TextMeasurer.Measure(sampleText, new TextOptions(_font)).Width;
+                var size = (ushort)TextMeasurer.MeasureAdvance(sampleText, new TextOptions(_font)).Width;
                 return new Image<Rgba32>(size + 15, _options.Height);
             }).Clone();
         }
@@ -107,7 +107,7 @@ namespace Captcha.Net
             int x0 = Rand.Next(0, width);
             int y0 = Rand.Next(0, height);
             var color = _options.NoiseRateColor[Rand.Next(0, _options.NoiseRateColor.Length)];
-            ctx.DrawLines(color, 1F, new PointF[] { new Vector2(x0, y0), new Vector2(x0, y0) });
+            ctx.DrawLine(color, 1F, new PointF[] { new Vector2(x0, y0), new Vector2(x0, y0) });
         }
 
         protected void DrawNoiseLines(IImageProcessingContext ctx, int width, int height)
@@ -117,7 +117,7 @@ namespace Captcha.Net
             int x1 = Rand.Next(width - Rand.Next(0, (int)(width * 0.25)), width);
             int y1 = Rand.Next(0, height);
             var lineColor = _options.DrawLinesColor[Rand.Next(0, _options.DrawLinesColor.Length)];
-            ctx.DrawLines(lineColor, LineThickness.Value, new PointF[] { new PointF(x0, y0), new PointF(x1, y1) });
+            ctx.DrawLine(lineColor, LineThickness.Value, new PointF[] { new PointF(x0, y0), new PointF(x1, y1) });
         }
 
         protected AffineTransformBuilder GetRotation()

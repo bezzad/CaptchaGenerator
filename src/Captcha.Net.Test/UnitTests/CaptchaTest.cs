@@ -122,7 +122,7 @@ namespace Captcha.Net.Test.UnitTests
             using var img = new Image<Rgba32>(width, height);
 
             img.Mutate(ctx => ctx.BackgroundColor(backgroundColor));
-            img.Mutate(ctx => ctx.DrawLines(lineColor, thickness, new PointF[] { new PointF(middleOffsetOfWidth, 0), new PointF(middleOffsetOfWidth, height) }));
+            img.Mutate(ctx => ctx.DrawLine(lineColor, thickness, new PointF[] { new PointF(middleOffsetOfWidth, 0), new PointF(middleOffsetOfWidth, height) }));
 
             // act:  rotate 90 degree to a horizontal line
             AffineTransformBuilder rotation = GetRotation(rotationDegrees, new PointF(middleOffsetOfWidth, middleOffsetOfHeight));
