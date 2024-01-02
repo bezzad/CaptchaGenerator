@@ -7,7 +7,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Captcha.Net</PackageId>
     <Title>Captcha.Net</Title>
-    <FileVersion>1.2.0</FileVersion>
+    <FileVersion>1.2.1</FileVersion>
     <Authors>Bezzad</Authors>
     <Description>CAPTCHA Generator with .Net 6.0</Description>
     <Copyright>2023</Copyright>
