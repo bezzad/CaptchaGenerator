@@ -9,26 +9,18 @@ namespace Captcha.Net
 {
     public static class Extensions
     {
-        private static Random Rand = new Random(DateTime.Now.GetHashCode());
+        private static readonly Random Rand = new(DateTime.Now.GetHashCode());
 
         private static readonly char[] Chars = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVXYZW23456789".ToCharArray();
 
         public static IImageEncoder GetEncoder(EncoderTypes encoderType)
         {
-            IImageEncoder encoder;
-            switch (encoderType)
+            IImageEncoder encoder = encoderType switch
             {
-                case EncoderTypes.Png:
-                    encoder = new PngEncoder();
-                    break;
-                case EncoderTypes.Jpeg:
-                    encoder = new JpegEncoder();
-                    break;
-                default:
-                    throw new ArgumentException($"Encoder '{encoderType}' not found!");
-            }
-
-            ;
+                EncoderTypes.Png => new PngEncoder(),
+                EncoderTypes.Jpeg => new JpegEncoder(),
+                _ => throw new ArgumentException($"Encoder '{encoderType}' not found!")
+            };
             return encoder;
         }
 
@@ -39,9 +31,9 @@ namespace Captcha.Net
 
         public static string GetUniqueKey(int size, char[] chars)
         {
-            byte[] data = new byte[4 * size];
+            var data = new byte[4 * size];
             RandomNumberGenerator.Fill(data);
-            StringBuilder result = new StringBuilder(size);
+            var result = new StringBuilder(size);
             for (int i = 0; i < size; i++)
             {
                 var rnd = BitConverter.ToUInt32(data, i * 4);
@@ -54,10 +46,10 @@ namespace Captcha.Net
 
         public static float GenerateNextFloat(double min = double.MinValue, double max = double.MaxValue)
         {
-            double range = max - min;
-            double sample = Rand.NextDouble();
-            double scaled = sample * range + min;
-            float result = (float)scaled;
+            var range = max - min;
+            var sample = Rand.NextDouble();
+            var scaled = sample * range + min;
+            var result = (float)scaled;
             return result;
         }
     }
