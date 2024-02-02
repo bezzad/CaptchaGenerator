@@ -1,9 +1,9 @@
-using SixLabors.ImageSharp.Formats;
-using SixLabors.ImageSharp.Formats.Jpeg;
-using SixLabors.ImageSharp.Formats.Png;
 using System;
 using System.Security.Cryptography;
 using System.Text;
+using SixLabors.ImageSharp.Formats;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SixLabors.ImageSharp.Formats.Png;
 
 namespace Captcha.Net
 {
@@ -26,7 +26,9 @@ namespace Captcha.Net
                     break;
                 default:
                     throw new ArgumentException($"Encoder '{encoderType}' not found!");
-            };
+            }
+
+            ;
             return encoder;
         }
 
