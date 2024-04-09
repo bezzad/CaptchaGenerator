@@ -20,12 +20,12 @@ public class CaptchaOptions
     public ushort Height { get; set; } = 50;
     public ushort NoiseRate { get; set; } = 100;
     public Color[] NoiseRateColor { get; set; } = new Color[] { Color.Gray, Color.Black, Color.Red };
-    public byte FontSize { get; set; } = 29;
+    public int FontSize { get; set; } = 29;
     public FontStyle FontStyle { get; set; } = FontStyle.Regular;
     public EncoderTypes EncoderType { get; set; } = EncoderTypes.Jpeg;
     public IImageEncoder Encoder => Extensions.GetEncoder(EncoderType);
-    public byte DrawLines { get; set; } = 5;
-    public byte MaxRotationDegrees { get; set; } = 5;
+    public int DrawLines { get; set; } = 5;
+    public int MaxRotationDegrees { get; set; } = 5;
     public Color[] BackgroundColor { get; set; } = new Color[] { Color.White };
     public float? RotationDegree { get; set; } = 3;
 
