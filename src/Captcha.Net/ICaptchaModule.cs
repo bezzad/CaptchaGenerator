@@ -1,7 +1,6 @@
-﻿namespace Captcha.Net
+﻿namespace Captcha.Net;
+
+public interface ICaptchaModule
 {
-    public interface ICaptchaModule
-    {
-        byte[] Generate(string text);
-    }
+    byte[] Generate(string text);
 }

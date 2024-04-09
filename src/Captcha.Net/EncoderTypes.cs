@@ -1,8 +1,7 @@
-﻿namespace Captcha.Net
+﻿namespace Captcha.Net;
+
+public enum EncoderTypes
 {
-    public enum EncoderTypes
-    {
-        Jpeg,
-        Png,
-    }
+    Jpeg,
+    Png,
 }
